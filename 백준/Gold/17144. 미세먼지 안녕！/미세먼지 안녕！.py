@@ -1,5 +1,6 @@
 R, C, T = map(int, input().split())
 M = [list(map(int, input().split())) for _ in range(R)]
+M_ = [[0 for _ in range(C)] for _ in range(R)]
 
 flag = False
 for r in range(R):
@@ -43,16 +44,17 @@ def wind(i, j):
 
 
 for _ in range(T):
-    M_ = [[0 for _ in range(C)] for _ in range(R)]
     for r in range(R):
         for c in range(C):
-            i_, j_ = wind(r, c)
-            M_[i_][j_] = (
+            r_, c_ = wind(r, c)
+            M_[r_][c_] = (
                 sum((M[x][y] // 5 - M[r][c] // 5) for (x, y) in adjacent(r, c))
                 + M[r][c]
             )
+    for r in range(R):
+        for c in range(C):
+            M[r][c] = M_[r][c]
     x, y = pos
-    M_[x][y] = 0
-    M_[x + 1][y] = 0
-    M = M_
+    M[x][y] = 0
+    M[x + 1][y] = 0
 print(sum(sum(v) for v in M))
