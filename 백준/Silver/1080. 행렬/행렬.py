@@ -7,9 +7,9 @@ for i in range(N - 2):
     for j in range(M - 2):
         if A[i][j] != B[i][j]:
             counter += 1
-            for di in range(3):
-                for dj in range(3):
-                    A[i + di][j + dj] = 1 - A[i + di][j + dj]
+            for i_ in range(i, i + 3):
+                for j_ in range(j, j + 3):
+                    A[i_][j_] = 1 - A[i_][j_]
     if A[i][M - 2] != B[i][M - 2] or A[i][M - 1] != B[i][M - 1]:
         counter = -1
         break
