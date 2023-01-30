@@ -1,7 +1,6 @@
 N, M = map(int, input().split())
-A = [[int(v) for v in input()] for _ in range(N)]
-B = [[int(v) for v in input()] for _ in range(N)]
-
+A = [list(map(int, input())) for _ in range(N)]
+B = [list(map(int, input())) for _ in range(N)]
 
 counter = 0
 for i in range(N - 2):
