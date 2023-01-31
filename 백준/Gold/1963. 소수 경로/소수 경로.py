@@ -1,12 +1,8 @@
-memo = {1: False, 2: True}
-
-
-def is_prime(n):
-    if n not in memo:
-        memo[n] = not any(
-            is_prime(i) and n % i == 0 for i in range(2, int(n**0.5) + 1)
-        )
-    return memo[n]
+is_prime = [True for _ in range(10000)]
+for i in range(2, 10000):
+    if is_prime[i]:
+        for j in range(i * 2, 10000, i):
+            is_prime[j] = False
 
 
 for _ in range(int(input())):
@@ -18,7 +14,7 @@ for _ in range(int(input())):
     counter = 0
     while True:
         for v in stack:
-            if (v not in visited) and is_prime(v):
+            if (v not in visited) and is_prime[v]:
                 visited.add(v)
                 a, b, c, d = v // 1000, v // 100 % 10, v // 10 % 10, v % 10
                 stack_.extend(n * 1000 + b * 100 + c * 10 + d for n in range(1, 10))
