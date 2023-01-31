@@ -1,6 +1,9 @@
-N, M = int(input()), int(input())
-S = [list(map(int, input().split())) for _ in range(N)]
-E = [int(v) - 1 for v in input().split()]
+import sys
+
+I = sys.stdin.readline
+N, M = int(I()), int(I())
+S = [list(map(int, I().split())) for _ in range(N)]
+E = [int(v) - 1 for v in I().split()]
 
 L = [i for i in range(N)]
 
