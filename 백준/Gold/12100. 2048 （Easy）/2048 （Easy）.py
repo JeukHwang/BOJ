@@ -1,5 +1,8 @@
-N = int(input())
-L = [list(map(int, input().split())) for _ in range(N)]
+import sys
+
+I = sys.stdin.readline
+N = int(I())
+L = [list(map(int, I().split())) for _ in range(N)]
 
 
 def merge(l, inverse=False):
@@ -31,9 +34,13 @@ def transpose(l):
 ls, ls_ = [L], []
 for i in range(5):
     for l in ls:
-        ls_.append([merge(v) for v in l])
-        ls_.append([merge(v[::-1], True) for v in l])
-        ls_.append(transpose([merge(v) for v in transpose(l)]))
-        ls_.append(transpose([merge(v[::-1], True) for v in transpose(l)]))
+        ls_.extend(
+            [
+                [merge(v) for v in l],
+                [merge(v[::-1], True) for v in l],
+                transpose([merge(v) for v in transpose(l)]),
+                transpose([merge(v[::-1], True) for v in transpose(l)]),
+            ]
+        )
     ls, ls_ = ls_, []
 print(max(j for l in ls for i in l for j in i))
