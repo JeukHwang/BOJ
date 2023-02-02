@@ -1,7 +1,10 @@
-N = int(input())
+import sys
+
+I = sys.stdin.readline
+N = int(I())
 G = [None] * (N + 1)
 for i in range(1, N + 1):
-    t, *ns, _ = map(int, input().split())
+    t, *ns, _ = map(int, I().split())
     G[i] = (t, ns)
 T = [-1] * (N + 1)
 
