@@ -1,15 +1,18 @@
-N, M = map(int, input().split())
-L = [input() for _ in range(N)]
+import sys
+
+I = sys.stdin.readline
+N, M = map(int, I().split())
+L = [I() for _ in range(N)]
 
 direction = ((1, 0), (0, 1), (-1, 0), (0, -1))
 counter, d = 1, -1
-visited = set()
+visited = [False] * (N * M * 2)
 stack, stack_ = [(0, 0, 1)], []
 while stack:
     for x_, y_, can_punch in stack:
-        if (x_, y_, can_punch) in visited:
+        if visited[x_ * M + y_ + N * M * can_punch]:
             continue
-        visited.add((x_, y_, can_punch))
+        visited[x_ * M + y_ + N * M * can_punch] = True
         if x_ == N - 1 and y_ == M - 1:
             d, stack_ = counter, []
             break
