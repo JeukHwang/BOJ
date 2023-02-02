@@ -16,5 +16,4 @@ def get(i):
     return T[i]
 
 
-for i in range(1, N + 1):
-    print(get(i))
+print("\n".join(str(get(i)) for i in range(1, N + 1)))
