@@ -1,18 +1,23 @@
 import sys
 
 
-def union(union_find, counter, a, b):
-    a_index = find(union_find, a)
-    b_index = find(union_find, b)
+def union(a, b):
+    global UNION_FIND
+    global COUNTER
+    a_index = find(a)
+    b_index = find(b)
     if a_index != b_index:
-        union_find[a_index] = b_index
-        counter[b_index] += counter[a_index]
+        UNION_FIND[a_index] = b_index
+        COUNTER[b_index] = (COUNTER[b_index] if b_index in COUNTER else 1) + (
+            COUNTER[a_index] if a_index in COUNTER else 1
+        )
 
 
-def find(union_find, n):
-    if union_find[n] != n:
-        v = find(union_find, union_find[n])
-        union_find[n] = v
+def find(n):
+    global UNION_FIND
+    if UNION_FIND[n] != n:
+        v = find(UNION_FIND[n])
+        UNION_FIND[n] = v
         return v
     else:
         return n
@@ -28,10 +33,8 @@ for _ in range(int(I())):
         if A not in ID:
             ID[A] = len(ID)
             UNION_FIND.append(ID[A])
-            COUNTER[ID[A]] = 1
         if B not in ID:
             ID[B] = len(ID)
             UNION_FIND.append(ID[B])
-            COUNTER[ID[B]] = 1
-        union(UNION_FIND, COUNTER, ID[A], ID[B])
-        print(COUNTER[find(UNION_FIND, ID[A])])
+        union(ID[A], ID[B])
+        print(COUNTER[find(ID[A])])
