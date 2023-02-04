@@ -2,17 +2,20 @@ import sys
 
 
 def union(union_find, counter, a, b):
-    max_index = find(union_find, max(a, b))
-    min_index = find(union_find, min(a, b))
-    if max_index != min_index:
-        union_find[max_index] = min_index
-        counter[min_index] += counter[max_index]
+    a_index = find(union_find, a)
+    b_index = find(union_find, b)
+    if a_index != b_index:
+        union_find[a_index] = b_index
+        counter[b_index] += counter[a_index]
 
 
 def find(union_find, n):
-    if n != union_find[n]:
-        union_find[n] = find(union_find, union_find[n])
-    return union_find[n]
+    if union_find[n] != n:
+        v = find(union_find, union_find[n])
+        union_find[n] = v
+        return v
+    else:
+        return n
 
 
 I = sys.stdin.readline
