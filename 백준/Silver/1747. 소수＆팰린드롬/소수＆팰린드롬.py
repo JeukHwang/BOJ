@@ -1,15 +1,5 @@
-memo = {1: False, 2: True}
-
-
 def is_prime(n):
-    if n not in memo:
-        flag = True
-        for i in range(2, int(n**0.5) + 1):
-            if n % i == 0:
-                flag = False
-                break
-        memo[n] = flag
-    return memo[n]
+    return n >= 2 and all(n % i != 0 for i in range(2, int(n**0.5) + 1))
 
 
 N = int(input())
