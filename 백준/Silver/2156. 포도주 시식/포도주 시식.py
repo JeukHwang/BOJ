@@ -1,7 +1,8 @@
-N = int(input())
-L = [int(input()) for _ in range(N)]
+import sys
 
-A, B, C = 0, 0, 0
-for i in range(N):
-    A, B, C = B, C, min(A, B, C) + L[i]
-print(sum(L) - min(A, B, C))
+I = sys.stdin.readline
+S, A, B, C = 0, 0, 0, 0
+for i in range(int(I())):
+    n = int(I())
+    S, A, B, C = S + n, B, C, min(A, B, C) + n
+print(S - min(A, B, C))
